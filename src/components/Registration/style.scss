@@ -1,0 +1,15 @@
+.auth-container {
+  margin-top: 50px;
+  form {
+    width: 300px;
+    margin: 10px auto;
+    .submit-form {
+      margin: 10px 0 5px;
+    }
+  }
+  form > div {
+    width: 250px;
+    margin-bottom: 10px;
+  }
+}
+
