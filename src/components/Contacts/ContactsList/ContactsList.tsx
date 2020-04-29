@@ -1,12 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types'
 
 import Button from '@material-ui/core/Button';
 
 import services from "../../../services/contacts";
 
-const ContactsList = (props) => {
-  const deleteContact = (id) => {
+interface Contact {
+  _id: string,
+  username: string
+}
+
+interface Props {
+  deleteContact: (id: string) => void,
+  contacts: Contact[]
+}
+
+const ContactsList: React.FC<Props> = (props) => {
+  const deleteContact = (id: string) => {
     services.deleteContact(id)
       .then(() => props.deleteContact(id))
       .catch((err) => console.log(err))
@@ -22,11 +31,6 @@ const ContactsList = (props) => {
       ))}
     </ul>
   );
-};
-
-ContactsList.propTypes = {
-  contacts: PropTypes.array,
-  deleteContact: PropTypes.func
 };
 
 export default ContactsList

@@ -1,6 +1,6 @@
 import api from './api'
 
-const login = data => {
+const login = (data: any) => {
   return api({
     method: 'POST',
     url: '/users/login',
@@ -11,7 +11,7 @@ const login = data => {
   });
 };
 
-const create = data => {
+const createUser = (data: any) => {
   return api({
     method: 'POST',
     url: '/users/create',
@@ -22,7 +22,7 @@ const create = data => {
   });
 };
 
-const update = data => {
+const updateUser = (data: any) => {
   return api({
     method: 'PUT',
     url: `/users/${data.userId}`,
@@ -40,6 +40,6 @@ const logout = () => {
 export default {
   login,
   logout,
-  create,
-  update
+  createUser,
+  updateUser
 }

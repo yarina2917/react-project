@@ -7,14 +7,14 @@ const getContacts = () => {
   });
 };
 
-const addContact = username => {
+const addContact = (username: string) => {
   return api({
     method: 'POST',
     url: `/contacts/${username}`,
   });
 };
 
-const deleteContact = id => {
+const deleteContact = (id: string) => {
   return api({
     method: 'DELETE',
     url: `/contacts/${id}`,

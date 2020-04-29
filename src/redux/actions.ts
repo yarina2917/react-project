@@ -1,4 +1,4 @@
-import actions from '../constants/auth'
+import actions from './auth/constants'
 
 const clearUserError = () => ({ type: actions.CLEAR_USER_ERROR });
 

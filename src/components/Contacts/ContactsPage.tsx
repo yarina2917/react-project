@@ -1,12 +1,21 @@
 import React, {useEffect, useState} from 'react'
 
-import AddNewContact from './AddNewContact'
-import ContactsList from './ContactsList'
+import AddNewContact from './AddNewContact/AddNewContact'
+import ContactsList from './ContactsList/ContactsList'
 
 import services from '../../services/contacts'
 
-const Contacts = () => {
-  const [contacts, setContacts] = useState([]);
+interface Contact {
+  _id: string,
+  username: string
+}
+
+interface State {
+  contacts: Contact[];
+}
+
+const Contacts: React.FC<State> = () => {
+  const [contacts, setContacts] = useState<Contact[]>([]);
 
   useEffect(() => {
     services.getContacts()
@@ -14,11 +23,11 @@ const Contacts = () => {
       .catch(err => console.log(err))
   }, []);
 
-  const handleAddContact = (contactData) => {
+  const handleAddContact = (contactData: Contact) => {
     setContacts([...contacts, contactData])
   };
 
-  const handleDeleteContact = (id) => {
+  const handleDeleteContact = (id: string) => {
     setContacts(contacts.filter(contact => contact._id !== id))
   };
 

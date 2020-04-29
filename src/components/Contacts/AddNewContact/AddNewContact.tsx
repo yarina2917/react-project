@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import PropTypes from "prop-types";
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,12 +9,21 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import services from "../../../services/contacts";
 
-const AddNewContact = (props) => {
-  const [isOpen, setOpen] = useState(false);
-  const [username, setUsername] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+interface Contact {
+  _id: string,
+  username: string
+}
 
-  const addContact = (event) => {
+interface Props {
+  addContact: (data: Contact) => void
+}
+
+const AddNewContact: React.FC<Props> = (props) => {
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const addContact = (event: React.MouseEvent) => {
     event.preventDefault();
     services.addContact(username)
       .then(res => {
@@ -58,10 +66,6 @@ const AddNewContact = (props) => {
       </Dialog>
     </div>
   );
-};
-
-AddNewContact.propTypes = {
-  addContact: PropTypes.func
 };
 
 export default AddNewContact

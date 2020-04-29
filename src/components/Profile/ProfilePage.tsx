@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import { connect, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 
 import { Button, TextField } from "@material-ui/core";
 
-import authActions from '../../constants/auth'
+import authActions from '../../redux/auth/constants'
 
-const Profile = ({user, errorMessage}) => {
+interface Props {
+  user: any
+  errorMessage: string
+}
+
+const Profile: React.FC<Props> = ({user, errorMessage}) => {
   const dispatch = useDispatch();
-  const [newName, setNewName] = useState(user.username);
-  const [isEdit, setIsEdit] = useState(false);
+  const [newName, setNewName] = useState<string>(user.username);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const update = () => {
     dispatch({type: authActions.UPDATE_USER, payload: {userId: user._id, data: {username: newName}}})
@@ -50,16 +54,11 @@ const Profile = ({user, errorMessage}) => {
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     user: state.auth.user,
     errorMessage: state.auth.errorMessage
   }
 }
-
-Profile.propTypes = {
-  user: PropTypes.object,
-  errorMessage: PropTypes.string
-};
 
 export default connect(mapStateToProps)(Profile)
