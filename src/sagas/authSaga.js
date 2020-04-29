@@ -30,7 +30,7 @@ function * create (action) {
 function * update (action) {
   try {
     const response = yield call(services.auth.update, action.payload);
-    yield put({ type: authActions.UPDATE_USER_SUCCESS, payload: response })
+    yield put({ type: authActions.UPDATE_USER_SUCCESS, payload: response.data })
   } catch (error) {
     yield put({ type: authActions.UPDATE_USER_ERROR, payload: error.response.data.message })
   }

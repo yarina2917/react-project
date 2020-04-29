@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { useDispatch, connect } from 'react-redux'
 
+import PropTypes from 'prop-types'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
+
 import { Button, TextField } from '@material-ui/core';
 
 import './style.scss'
@@ -82,5 +84,9 @@ function mapStateToProps(state) {
     errorMessage: state.auth.errorMessage
   }
 }
+
+Registration.propTypes = {
+  errorMessage: PropTypes.string
+};
 
 export default connect(mapStateToProps)(Registration)
