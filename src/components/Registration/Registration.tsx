@@ -9,7 +9,7 @@ import { Button, TextField } from '@material-ui/core';
 
 import './style.scss'
 
-import authActions from '../../redux/auth/constants'
+import actionsTypes from '../../redux/auth/constants'
 
 interface Props {
   errorMessage: string
@@ -37,7 +37,7 @@ const Registration: React.FC<Props> = (props) => {
         .required('Password confirmation is required')
     }),
     onSubmit (values) {
-      dispatch({type: authActions.CREATE_USER, payload: {username: values.username, password: values.password}})
+      dispatch({type: actionsTypes.CREATE_USER, payload: {username: values.username, password: values.password}})
     }
   });
   return (
@@ -82,10 +82,8 @@ const Registration: React.FC<Props> = (props) => {
   )
 };
 
-function mapStateToProps(state: any) {
-  return {
-    errorMessage: state.auth.errorMessage
-  }
-}
+const mapStateToProps = (state: any) => ({
+  errorMessage: state.auth.errorMessage
+});
 
 export default connect(mapStateToProps)(Registration)

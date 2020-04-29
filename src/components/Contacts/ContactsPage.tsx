@@ -10,11 +10,7 @@ interface Contact {
   username: string
 }
 
-interface State {
-  contacts: Contact[];
-}
-
-const Contacts: React.FC<State> = () => {
+const Contacts = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
 
   useEffect(() => {

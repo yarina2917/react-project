@@ -41,7 +41,7 @@ function * logout () {
     yield call(services.auth.logout);
     services.cookies.remove('token');
     history.push('/login');
-    yield put({ type: authActions.LOGIN_USER_SUCCESS, payload: [] })
+    yield put({ type: authActions.LOGOUT_USER, payload: [] })
   } catch (error) {
     yield put({ type: authActions.AUTH_USER_ERROR, payload: error.response.data.message })
   }
