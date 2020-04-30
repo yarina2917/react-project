@@ -9,7 +9,7 @@ const Profile: React.FC<Props> = ({ user, errorMessage, clearUserError, updateUs
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const update = () => {
-    updateUser({userId: user._id, data: {username: newName}});
+    updateUser({userId: user._id, data: {username: newName}, callback: () => setIsEdit(false)});
   };
 
   const cancel = () => {

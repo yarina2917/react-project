@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
@@ -76,8 +75,4 @@ const Registration: React.FC<Props> = ({ errorMessage, createUser }) => {
   )
 };
 
-const mapStateToProps = (state: any) => ({
-  errorMessage: state.auth.errorMessage
-});
-
-export default connect(mapStateToProps)(Registration)
+export default Registration

@@ -7,5 +7,6 @@ export interface Props {
 
 interface UpdateUserInfo {
   userId: string,
-  data: any
+  data: any,
+  callback: () => void
 }
