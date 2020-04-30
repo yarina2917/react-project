@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react'
 
+import { toast } from 'react-toastify';
+
 import AddNewContact from './AddNewContact/AddNewContact'
 import ContactsList from './ContactsList/ContactsList'
 
-import services from '../../services/contacts'
-
-interface Contact {
-  _id: string,
-  username: string
-}
+import { Contact } from './Contact.interface';
+import services from '../../services/contacts';
 
 const Contacts = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
@@ -16,7 +14,7 @@ const Contacts = () => {
   useEffect(() => {
     services.getContacts()
       .then(res => setContacts(res.data))
-      .catch(err => console.log(err))
+      .catch(err => toast.error(err.response.data.message))
   }, []);
 
   const handleAddContact = (contactData: Contact) => {
@@ -24,7 +22,12 @@ const Contacts = () => {
   };
 
   const handleDeleteContact = (id: string) => {
-    setContacts(contacts.filter(contact => contact._id !== id))
+    services.deleteContact(id)
+      .then(() => {
+        setContacts(contacts.filter(contact => contact._id !== id));
+        toast.success('Contact was deleted');
+      })
+      .catch(err => toast.error(err.response.data.message))
   };
 
   return (

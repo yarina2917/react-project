@@ -1,6 +1,6 @@
 import update from 'immutability-helper'
 
-import actions from './constants'
+import actionsType from './constants'
 
 export const initialState = {
   user: {},
@@ -9,31 +9,31 @@ export const initialState = {
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
-    case actions.CREATE_USER_SUCCESS:
+    case actionsType.CREATE_USER_SUCCESS:
       return update(state, {
         user: { $set: action.payload },
         errorMessage: { $set: '' }
       });
-    case actions.LOGIN_USER_SUCCESS:
+    case actionsType.LOGIN_USER_SUCCESS:
       return update(state, {
         user: { $set: action.payload },
         errorMessage: { $set: '' }
       });
-    case actions.UPDATE_USER_SUCCESS:
+    case actionsType.UPDATE_USER_SUCCESS:
       return update(state, {
         user: { $merge: action.payload },
         errorMessage: { $set: '' }
       });
-    case actions.LOGOUT_USER_SUCCESS:
+    case actionsType.LOGOUT_USER_SUCCESS:
       return update(state, {
         user: { $set: {} },
         errorMessage: { $set: '' }
       });
-    case actions.AUTH_USER_ERROR:
+    case actionsType.AUTH_USER_ERROR:
       return update(state, {
         errorMessage: { $set: action.payload }
       });
-    case actions.CLEAR_USER_ERROR:
+    case actionsType.CLEAR_USER_ERROR:
       return update(state, {
         errorMessage: { $set: '' }
       });

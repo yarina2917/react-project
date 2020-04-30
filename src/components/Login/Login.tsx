@@ -1,20 +1,15 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { connect, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField } from '@material-ui/core';
+
+import { Props } from './Login.interface';
 
 import '../Registration/style.scss'
-import actionsTypes from "../../redux/auth/constants";
 
-interface Props {
-  errorMessage: string
-}
-
-const Login: React.FC<Props> = (props) => {
-  const dispatch = useDispatch();
+const Login: React.FC<Props> = ({ errorMessage, loginUser }) => {
   const form = useFormik({
     initialValues: {
       username: '',
@@ -29,7 +24,7 @@ const Login: React.FC<Props> = (props) => {
         .required('Password is required'),
     }),
     onSubmit(values) {
-      dispatch({type: actionsTypes.LOGIN_USER, payload: {username: values.username, password: values.password}})
+      loginUser({username: values.username, password: values.password})
     }
   });
   return (
@@ -56,7 +51,7 @@ const Login: React.FC<Props> = (props) => {
           onBlur={form.handleBlur}
           value={form.values.password}
         />
-        {props.errorMessage && <p className="error-message">{props.errorMessage}</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <Button className="submit-form" type="submit" variant="contained" color="primary" disabled={!form.dirty || !form.isValid}>Submit</Button>
       </form>
       <Button color="primary" variant="contained"><Link to="/registration">Go to registration</Link></Button>
@@ -64,8 +59,4 @@ const Login: React.FC<Props> = (props) => {
   )
 };
 
-const mapStateToProps = (state: any) => ({
-  errorMessage: state.auth.errorMessage
-});
-
-export default connect(mapStateToProps)(Login)
+export default Login

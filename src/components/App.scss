@@ -27,6 +27,14 @@ a {
   margin: 10px 0;
 }
 
+nav {
+  display: flex;
+  justify-content: flex-end;
+  .MuiButton-contained {
+    margin-left: 10px;
+  }
+}
+
 .edit-data {
   display: flex;
   align-items: flex-end;

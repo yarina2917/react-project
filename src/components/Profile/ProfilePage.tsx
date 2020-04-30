@@ -1,25 +1,15 @@
 import React, {useState} from 'react';
-import { bindActionCreators } from "redux";
-import { connect, useDispatch } from "react-redux";
 
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField } from '@material-ui/core';
 
-import actionsTypes from '../../redux/auth/constants';
-import { clearUserError } from '../../redux/auth/actions';
+import { Props } from './Profile.interface';
 
-interface Props {
-  user: any
-  errorMessage: string,
-  clearUserError: () => void
-}
-
-const Profile: React.FC<Props> = ({user, errorMessage, clearUserError}) => {
-  const dispatch = useDispatch();
+const Profile: React.FC<Props> = ({ user, errorMessage, clearUserError, updateUser }) => {
   const [newName, setNewName] = useState<string>(user.username);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const update = () => {
-    dispatch({type: actionsTypes.UPDATE_USER, payload: {userId: user._id, data: {username: newName}}})
+    updateUser({userId: user._id, data: {username: newName}});
   };
 
   const cancel = () => {
@@ -59,13 +49,4 @@ const Profile: React.FC<Props> = ({user, errorMessage, clearUserError}) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  user: state.auth.user,
-  errorMessage: state.auth.errorMessage
-});
-
-const mapDispatchToProps = (dispatch: any) => (
-  bindActionCreators({ clearUserError }, dispatch)
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default Profile

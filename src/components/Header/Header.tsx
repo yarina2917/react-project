@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { Button } from "@material-ui/core";
-import './style.scss'
 
 import authActionsTypes from "../../redux/auth/constants";
 
