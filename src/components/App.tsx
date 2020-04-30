@@ -1,14 +1,17 @@
 import React from 'react';
 import { Route, Switch, useLocation }  from 'react-router-dom'
 
-import MainPage from './components/Main'
-import ContactsPage from './components/Contacts'
-import ProfilePage from './components/Profile'
-import RegistrationPage from './components/Registration'
-import LoginPage from './components/Login'
-import NotFoundPage from './components/NotFound'
-import PrivateRoute from './components/Routes/PrivateRoute'
-import Header from "./components/Header"
+import MainPage from './Main/MainPage'
+import ContactsPage from './Contacts/ContactsPage'
+import ProfilePage from './Profile/ProfileContainer'
+import RegistrationPage from './Registration/RegistrationContainer'
+import LoginPage from './Login/LoginContainer'
+import NotFoundPage from './NotFound/NotFoundPage'
+import PrivateRoute from './Routes/PrivateRoute'
+import Header from './Header/Header'
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './App.scss';
 
@@ -25,6 +28,7 @@ function App() {
         <Route path="/login" component={LoginPage}/>
         <Route component={NotFoundPage} />
       </Switch>
+      <ToastContainer autoClose={3000} hideProgressBar/>
     </div>
   );
 }

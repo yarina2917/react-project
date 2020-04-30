@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import cookies from '../services/cookies'
+import cookies from './cookies'
 
 import config from '../constants/config'
 
@@ -11,7 +11,7 @@ const instance = axios.create({
   }
 });
 
-instance.interceptors.request.use(request => {
+instance.interceptors.request.use((request: any) => {
   if (!request.url.includes('login') && !request.url.includes('registration')) {
     request.headers['x-api-key'] = cookies.get('token');
   }

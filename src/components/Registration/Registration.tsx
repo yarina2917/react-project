@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { connect, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import { useFormik } from 'formik'
+import { useFormik } from 'formik';
 import * as Yup from 'yup'
-import { Button, TextField } from "@material-ui/core";
 
-import '../Registration/style.scss'
-import authActions from "../../constants/auth";
+import { Props } from './Registration.interface';
 
-const Login = (props) => {
-  const dispatch = useDispatch();
+import { Button, TextField } from '@material-ui/core';
+import './style.scss'
+
+const Registration: React.FC<Props> = ({ errorMessage, createUser }) => {
   const form = useFormik({
     initialValues: {
       username: '',
       password: '',
+      confirmPassword: ''
     },
     validationSchema: Yup.object().shape({
       username: Yup
@@ -22,15 +22,20 @@ const Login = (props) => {
         .required('Username is required'),
       password: Yup
         .string()
+        .min(8, 'Must be at least 8 symbols')
         .required('Password is required'),
+      confirmPassword: Yup
+        .string()
+        .oneOf([Yup.ref('password')], 'Passwords are not equal')
+        .required('Password confirmation is required')
     }),
-    onSubmit: values => {
-      dispatch({type: authActions.LOGIN_USER, payload: {username: values.username, password: values.password}})
+    onSubmit (values) {
+      createUser({ username: values.username, password: values.password });
     }
   });
   return (
     <div className="auth-container">
-      <h2>Login</h2>
+      <h2>Registration</h2>
       <form onSubmit={form.handleSubmit}>
         <TextField
           error={!!(form.touched.username && form.errors.username)}
@@ -52,18 +57,22 @@ const Login = (props) => {
           onBlur={form.handleBlur}
           value={form.values.password}
         />
-        {props.errorMessage && <p className="error-message">{props.errorMessage}</p>}
+        <TextField
+          error={!!(form.touched.confirmPassword && form.errors.confirmPassword)}
+          helperText={form.touched.confirmPassword && form.errors.confirmPassword}
+          id="confirmPassword"
+          label="Confirm Password"
+          type="password"
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          value={form.values.confirmPassword}
+        />
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <Button className="submit-form" type="submit" variant="contained" color="primary" disabled={!form.dirty || !form.isValid}>Submit</Button>
       </form>
-      <Button color="primary" variant="contained"><Link to="/registration">Go to registration</Link></Button>
+      <Button color="primary" variant="contained"><Link to="/login">Go to login</Link></Button>
     </div>
   )
 };
 
-function mapStateToProps(state) {
-  return {
-    errorMessage: state.auth.errorMessage
-  }
-}
-
-export default connect(mapStateToProps)(Login)
+export default Registration

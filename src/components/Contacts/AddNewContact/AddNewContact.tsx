@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import PropTypes from "prop-types";
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,19 +7,20 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import services from "../../../services/contacts";
+import { AddContactProps as Props } from '../Contact.interface';
+import services from '../../../services/contacts';
 
-const AddNewContact = (props) => {
-  const [isOpen, setOpen] = useState(false);
-  const [username, setUsername] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+const AddNewContact: React.FC<Props> = ({ addContact }) => {
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const addContact = (event) => {
+  const handleAddContact = (event: React.MouseEvent) => {
     event.preventDefault();
     services.addContact(username)
       .then(res => {
-        props.addContact(res.data);
-        closeModal()
+        addContact(res.data);
+        closeModal();
       })
       .catch(err => setErrorMessage(err.response.data.message))
   };
@@ -52,16 +52,12 @@ const AddNewContact = (props) => {
         </DialogContent>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <DialogActions>
-          <Button onClick={(e) => addContact(e)} color="primary">Add</Button>
+          <Button onClick={(e) => handleAddContact(e)} color="primary">Add</Button>
           <Button onClick={() => closeModal()} color="primary">Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-};
-
-AddNewContact.propTypes = {
-  addContact: PropTypes.func
 };
 
 export default AddNewContact

@@ -1,8 +1,8 @@
 import { takeLatest, all } from 'redux-saga/effects'
 
-import authSaga from './authSaga'
+import authSaga from './saga'
 
-import authActions from '../constants/auth'
+import authActions from './constants'
 
 function * watchAuth () {
   yield all([
