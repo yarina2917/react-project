@@ -1,0 +1,10 @@
+.chat-main {
+  max-width: 900px;
+  height: 80vh;
+  margin: 0 auto;
+  background-color: white;
+  .chat-container {
+    display: flex;
+    height: 100%;
+  }
+}
