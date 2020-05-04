@@ -1,4 +1,6 @@
-import api from './api'
+import api from './api';
+
+import store from '../redux/store';
 
 const getChats = () => {
   return api({
@@ -7,6 +9,15 @@ const getChats = () => {
   });
 };
 
+const getMessages = (lastMessageDate: string) => {
+  const chatId = store.getState().chats.activeChat?._id;
+  return api({
+    method: 'GET',
+    url: `/messages/${chatId}?lastMessageDate=${lastMessageDate}`,
+  });
+};
+
 export default {
-  getChats
+  getChats,
+  getMessages
 }

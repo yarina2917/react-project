@@ -1,11 +1,11 @@
 export interface Props {
   user: any
   errorMessage: string,
-  updateUser: (data: UpdateUserInfo) => void,
+  updateUser: (data: IUpdateUserData) => void,
   clearUserError: () => void
 }
 
-interface UpdateUserInfo {
+interface IUpdateUserData {
   userId: string,
   data: any,
   callback: () => void

@@ -4,7 +4,7 @@ import actionsType from './constants'
 
 export const initialState = {
   chatLists: [],
-  activeChat: {},
+  activeChat: {} as any,
   errorMessage: ''
 };
 

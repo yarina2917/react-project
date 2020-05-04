@@ -6,12 +6,12 @@ export interface Chat {
   chatType: string,
   createdAt: string,
   description: string,
-  lastMessage: LastMessage,
+  lastMessage: ILastMessage,
   users: any,
   _id: string,
 }
 
-interface LastMessage {
+interface ILastMessage {
   authorId: any,
   chatId: string,
   createdAt: string,
