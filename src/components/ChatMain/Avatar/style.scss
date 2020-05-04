@@ -1,0 +1,15 @@
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 37px;
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  background-color: #737391;
+  margin: 0 10px;
+  span {
+    font-size: 25px;
+    color: white;
+  }
+}

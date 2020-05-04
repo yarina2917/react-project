@@ -1,0 +1,18 @@
+.chat-header {
+  display: flex;
+  height: 50px;
+  color: #ffffff;
+  background-color: #5580a3;
+  .chat-header-settings {
+    width: 30%;
+  }
+  .chat-header-info {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: pre;
+  }
+}
