@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Avatar from '../../Avatar/Avatar';
 
@@ -13,6 +13,8 @@ import './style.scss';
 const TextEditor: React.FC<Props> = ({ activeChat }) => {
   const [usersTyping, setUsersTyping] = useState<IUsersTyping[]>([]);
   const [textMessage, setTextMessage] = useState<string>('');
+
+  useEffect(() => setTextMessage(''), [activeChat._id]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {

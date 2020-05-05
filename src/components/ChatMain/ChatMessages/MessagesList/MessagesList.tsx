@@ -6,11 +6,11 @@ import Message from './Message/MessageContainer';
 import services from '../../../../services';
 
 import { IMessage } from '../ChatMessages.interface';
-import { MessagesListInterface } from './MessagesList.interface';
+import { MessagesListInterface as Props } from './MessagesList.interface';
 
 import './style.scss';
 
-const MessagesList: React.FC<MessagesListInterface> = ({ activeChat }) => {
+const MessagesList: React.FC<Props> = ({ activeChat, updateChatMessage }) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
 
   useEffect(() => {
@@ -22,7 +22,8 @@ const MessagesList: React.FC<MessagesListInterface> = ({ activeChat }) => {
   useEffect(() => {
     services.socket.getMessage((err, data) => {
       if (!err && data.chatId === activeChat._id) {
-        setMessages(prevMessages => [data, ...prevMessages])
+        updateChatMessage(data);
+        setMessages(prevMessages => [data, ...prevMessages]);
       }
     });
     services.socket.deleteMessage((err, data) => {

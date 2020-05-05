@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TextEditor from './TextEditor/TextEditor';
-import MessagesList from './MessagesList/MessagesList';
+import MessagesList from './MessagesList/MessagesListContainer';
 import MessagesActions from './MessagesActions/MessagesActions';
 
 import services from '../../../services'
