@@ -11,6 +11,13 @@ const login = (data: any) => {
   });
 };
 
+const getUser = () => {
+  return api({
+    method: 'GET',
+    url: '/users/get-one',
+  });
+};
+
 const createUser = (data: any) => {
   return api({
     method: 'POST',
@@ -40,6 +47,7 @@ const logout = () => {
 export default {
   login,
   logout,
+  getUser,
   createUser,
   updateUser
 }

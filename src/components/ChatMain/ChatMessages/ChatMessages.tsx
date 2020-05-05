@@ -2,18 +2,31 @@ import React from 'react';
 
 import TextEditor from './TextEditor/TextEditor';
 import MessagesList from './MessagesList/MessagesList';
+import MessagesActions from './MessagesActions/MessagesActions';
+
+import services from '../../../services'
 
 import { ChatMessagesProps as Props } from './ChatMessages.interface';
 
 import './style.scss';
 
-const ChatMessages: React.FC<Props> = ({ activeChat }) => {
+const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelectedMessage }) => {
+  const handleDelete = () => {
+    services.socket.getSocket().emit('delete-messages', {
+      messages: selectedMessages,
+      chatId: activeChat._id
+    });
+    setSelectedMessage([])
+  };
   return (
      <div className="chat-messages">
        {activeChat?._id && (
         <>
-          <MessagesList/>
-          <TextEditor activeChat={activeChat}/>
+          <MessagesList activeChat={activeChat}/>
+          { !selectedMessages.length && <TextEditor activeChat={activeChat}/> }
+          { selectedMessages.length && (
+            <MessagesActions cancelSelect={() => setSelectedMessage([])} deleteMessages={handleDelete}/>
+          )}
         </>
        )}
        {!activeChat?._id && (

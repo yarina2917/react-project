@@ -1,7 +1,9 @@
 import { Chat } from '../ChatMain.interface';
 
 export interface ChatMessagesProps {
-  activeChat: Chat
+  activeChat: Chat,
+  selectedMessages: string[],
+  setSelectedMessage: (data: string[]) => void
 }
 
 export interface IMessage {

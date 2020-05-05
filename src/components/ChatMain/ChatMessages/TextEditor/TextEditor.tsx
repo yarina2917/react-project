@@ -4,6 +4,9 @@ import Avatar from '../../Avatar/Avatar';
 
 import { TextEditorProps as Props, IUsersTyping } from './TextEditor.inteface';
 
+import socketService from '../../../../services/socket';
+import store from '../../../../redux/store';
+
 import { Button, TextField } from '@material-ui/core';
 import './style.scss';
 
@@ -19,7 +22,12 @@ const TextEditor: React.FC<Props> = ({ activeChat }) => {
 
   const sendMessage = () => {
     if (textMessage.trim().length) {
-
+      socketService.getSocket().emit('message', {
+        authorId: store.getState().auth.user._id,
+        chatId: activeChat._id,
+        message: textMessage
+      });
+      setTextMessage('');
     }
   };
 

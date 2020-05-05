@@ -5,6 +5,7 @@ import actionsType from './constants'
 export const initialState = {
   chatLists: [],
   activeChat: {} as any,
+  selectedMessages: [],
   errorMessage: ''
 };
 
@@ -21,6 +22,11 @@ export default (state = initialState, action: any) => {
     case actionsType.SELECT_CHAT:
       return update(state, {
         activeChat: {$set: action.payload},
+        selectedMessages: {$set: []}
+      });
+    case actionsType.SET_SELECTED_MESSAGES:
+      return update(state, {
+        selectedMessages: {$set: action.payload}
       });
     default:
       return state
