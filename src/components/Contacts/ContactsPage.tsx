@@ -5,11 +5,11 @@ import { toast } from 'react-toastify';
 import AddNewContact from './AddNewContact/AddNewContact'
 import ContactsList from './ContactsList/ContactsList'
 
-import { Contact } from './Contact.interface';
+import { IContact } from './Contact.interface';
 import services from '../../services/contacts';
 
 const Contacts = () => {
-  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [contacts, setContacts] = useState<IContact[]>([]);
 
   useEffect(() => {
     services.getContacts()
@@ -17,7 +17,7 @@ const Contacts = () => {
       .catch(err => toast.error(err.response.data.message))
   }, []);
 
-  const handleAddContact = (contactData: Contact) => {
+  const handleAddContact = (contactData: IContact) => {
     setContacts([...contacts, contactData])
   };
 

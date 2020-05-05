@@ -9,6 +9,7 @@ function * login (action: any) {
   try {
     const response = yield call(services.auth.login, action.payload);
     services.cookies.set('token', response.data.apiKey);
+    services.socket.setSocket(response.data._id);
     history.push('/');
     yield put({ type: authActions.LOGIN_USER_SUCCESS, payload: response.data });
   } catch (error) {
@@ -20,8 +21,21 @@ function * create (action: any) {
   try {
     const response = yield call(services.auth.createUser, action.payload);
     services.cookies.set('token', response.data.apiKey);
+    services.socket.setSocket(response.data._id);
     history.push('/');
-    yield put({ type: authActions.CREATE_USER_SUCCESS, payload: response.data});
+    yield put({ type: authActions.LOGIN_USER_SUCCESS, payload: response.data});
+  } catch (error) {
+    yield put({ type: authActions.AUTH_USER_ERROR, payload: error.response.data.message });
+  }
+}
+
+function * getUser () {
+  try {
+    const response = yield call(services.auth.getUser);
+    services.cookies.set('token', response.data.apiKey);
+    services.socket.setSocket(response.data._id);
+    history.push('/');
+    yield put({ type: authActions.LOGIN_USER_SUCCESS, payload: response.data});
   } catch (error) {
     yield put({ type: authActions.AUTH_USER_ERROR, payload: error.response.data.message });
   }
@@ -51,6 +65,7 @@ function * logout () {
 export default {
   login,
   create,
+  getUser,
   update,
   logout
 }

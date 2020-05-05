@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Route, Switch, useLocation }  from 'react-router-dom'
 
 import ChatMain from './ChatMain/ChatMain'
@@ -15,22 +15,31 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './App.scss';
 
-function App() {
+import { Props } from './App.interface'
+
+const App: React.FC<Props> = ({ getUser, isReady }) => {
   const { pathname } = useLocation();
+  useEffect(() => {
+    getUser()
+  }, []);
   return (
-    <div className="App">
-      {!['/login', '/registration'].includes(pathname) && <Header/>}
-      <Switch>
-        <PrivateRoute exact path="/" component={ChatMain}/>
-        <PrivateRoute path="/contacts" component={ContactsPage}/>
-        <PrivateRoute path="/profile" component={ProfilePage}/>
-        <Route path="/registration" component={RegistrationPage}/>
-        <Route path="/login" component={LoginPage}/>
-        <Route component={NotFoundPage} />
-      </Switch>
-      <ToastContainer autoClose={3000} hideProgressBar/>
-    </div>
-  );
-}
+    <>
+      {isReady && (
+      <div className="App">
+        {!['/login', '/registration'].includes(pathname) && <Header/>}
+        <Switch>
+          <PrivateRoute exact path="/" component={ChatMain}/>
+          <PrivateRoute path="/contacts" component={ContactsPage}/>
+          <PrivateRoute path="/profile" component={ProfilePage}/>
+          <Route path="/registration" component={RegistrationPage}/>
+          <Route path="/login" component={LoginPage}/>
+          <Route component={NotFoundPage} />
+        </Switch>
+        <ToastContainer autoClose={3000} hideProgressBar/>
+      </div>
+    )}
+    </>
+  )
+};
 
 export default App;

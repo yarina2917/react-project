@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import classNames from 'classnames';
 
 import Avatar from '../../Avatar/Avatar';
 
@@ -6,7 +7,7 @@ import { ChatPreviewProps as Props } from '../ChatLists.interface';
 
 const ChatPreview: React.FC<Props> = ({ chat, selectChat, activeChatId }) => {
   return (
-    <li onClick={() => selectChat(chat)} className={activeChatId === chat._id ? 'active-chat' : ''}>
+    <li onClick={() => selectChat(chat)} className={classNames({'active-chat': activeChatId === chat._id})}>
       <Avatar username={chat.chatName} avatarUrl={chat.avatar.url}/>
       <div className="chat-data">
         <div className="chat-info">

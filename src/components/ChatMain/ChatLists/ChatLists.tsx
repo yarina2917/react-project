@@ -8,7 +8,7 @@ import './style.scss'
 
 const ChatLists: React.FC<Props> = ({ chatLists, getChats, selectChat, activeChatId }) => {
   useEffect(() => {
-    const response = getChats();
+    getChats();
   }, []);
   return (
      <div className="chat-lists">
