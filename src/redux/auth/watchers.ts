@@ -6,8 +6,8 @@ import authActions from './constants'
 
 function * watchAuth () {
   yield all([
-    takeLatest(authActions.CREATE_USER, authSaga.create),
-    takeLatest(authActions.UPDATE_USER, authSaga.update),
+    takeLatest(authActions.CREATE_USER, authSaga.createUser),
+    takeLatest(authActions.UPDATE_USER, authSaga.updateUser),
     takeLatest(authActions.GET_USER, authSaga.getUser),
     takeLatest(authActions.LOGIN_USER, authSaga.login),
     takeLatest(authActions.LOGOUT_USER, authSaga.logout),

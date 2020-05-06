@@ -1,28 +1,25 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects';
 
-import services from '../../services'
-import history from '../../history/history'
+import services from '../../services';
+import cookies from '../../services/cookies';
+import history from '../../history/history';
 
-import authActions from './constants'
+import authActions from './constants';
 
 function * login (action: any) {
   try {
     const response = yield call(services.auth.login, action.payload);
-    services.cookies.set('token', response.data.apiKey);
-    services.socket.setSocket(response.data._id);
-    history.push('/');
+    setLoginData(response.data);
     yield put({ type: authActions.LOGIN_USER_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: authActions.AUTH_USER_ERROR, payload: error.response.data.message });
   }
 }
 
-function * create (action: any) {
+function * createUser (action: any) {
   try {
     const response = yield call(services.auth.createUser, action.payload);
-    services.cookies.set('token', response.data.apiKey);
-    services.socket.setSocket(response.data._id);
-    history.push('/');
+    setLoginData(response.data);
     yield put({ type: authActions.LOGIN_USER_SUCCESS, payload: response.data});
   } catch (error) {
     yield put({ type: authActions.AUTH_USER_ERROR, payload: error.response.data.message });
@@ -30,18 +27,20 @@ function * create (action: any) {
 }
 
 function * getUser () {
-  try {
-    const response = yield call(services.auth.getUser);
-    services.cookies.set('token', response.data.apiKey);
-    services.socket.setSocket(response.data._id);
-    history.push('/');
-    yield put({ type: authActions.LOGIN_USER_SUCCESS, payload: response.data});
-  } catch (error) {
-    yield put({ type: authActions.AUTH_USER_ERROR, payload: error.response.data.message });
+  if (cookies.get('token')) {
+    try {
+      const response = yield call(services.auth.getUser);
+      setLoginData(response.data);
+      yield put({ type: authActions.LOGIN_USER_SUCCESS, payload: response.data});
+    } catch (error) {
+      yield put({ type: authActions.AUTH_USER_ERROR, payload: error.response.data.message });
+    }
+  } else {
+    yield put({ type: authActions.AUTH_USER_ERROR, payload: '' });
   }
 }
 
-function * update (action: any) {
+function * updateUser (action: any) {
   try {
     const response = yield call(services.auth.updateUser, action.payload);
     yield put({ type: authActions.UPDATE_USER_SUCCESS, payload: response.data });
@@ -56,16 +55,22 @@ function * logout () {
     yield call(services.auth.logout);
     services.cookies.remove('token');
     history.push('/login');
-    yield put({ type: authActions.LOGOUT_USER, payload: [] });
+    yield put({ type: authActions.LOGOUT_USER_SUCCESS, payload: [] });
   } catch (error) {
     yield put({ type: authActions.AUTH_USER_ERROR, payload: error.response.data.message });
   }
 }
 
+const setLoginData = (data: any) => {
+  services.cookies.set('token', data.apiKey);
+  services.socket.setSocket(data._id);
+  history.push('/');
+};
+
 export default {
   login,
-  create,
+  createUser,
+  updateUser,
   getUser,
-  update,
   logout
 }
