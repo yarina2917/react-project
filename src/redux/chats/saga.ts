@@ -22,7 +22,17 @@ function * getChat (action: any) {
   }
 }
 
+function * deleteChannel () {
+  try {
+    const response = yield call(services.chats.deleteChannel);
+    yield put({ type: chatsActions.DELETE_CHANNEL_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: chatsActions.CHATS_ERROR, payload: error.response.data.message });
+  }
+}
+
 export default {
   getChats,
-  getChat
+  getChat,
+  deleteChannel
 }

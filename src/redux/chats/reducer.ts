@@ -26,6 +26,10 @@ export default (state = initialState, action: any) => {
         activeChat: {$set: action.payload},
         selectedMessages: {$set: []}
       });
+    case actionsType.UPDATE_CHATS:
+      return update(state, {
+        chatLists: {$set: action.payload},
+      });
     case actionsType.UPDATE_CHAT_MESSAGE:
       const updatedData = services.chats.updateLastMessage(state.chatLists, action.payload);
       return update(state, {

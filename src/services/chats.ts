@@ -19,10 +19,18 @@ const getChat = (data: any) => {
 };
 
 const getMessages = (lastMessageDate: string) => {
-  const chatId = store.getState().chats.activeChat?._id;
+  const chatId = store.getState().chats.activeChat._id;
   return api({
     method: 'GET',
     url: `/messages/${chatId}?lastMessageDate=${lastMessageDate}`,
+  });
+};
+
+const deleteChannel = () => {
+  const chatId = store.getState().chats.activeChat._id;
+  return api({
+    method: 'DELETE',
+    url: `/chats/${chatId}`,
   });
 };
 
@@ -52,5 +60,6 @@ export default {
   getChats,
   getChat,
   getMessages,
-  updateLastMessage
+  updateLastMessage,
+  deleteChannel
 }

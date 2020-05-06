@@ -24,7 +24,7 @@ const TextEditor: React.FC<Props> = ({ activeChat }) => {
 
   const sendMessage = () => {
     if (textMessage.trim().length) {
-      socketService.getSocket().emit('message', {
+      socketService.sendEvent('message', {
         authorId: store.getState().auth.user._id,
         chatId: activeChat._id,
         message: textMessage
