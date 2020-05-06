@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import Avatar from '../../ChatMain/Avatar/Avatar';
 
 import { ChatSettingsData as Props } from '../ChatInformations.interface';
 
@@ -19,6 +21,7 @@ const ChatSettings: React.FC<Props> = ({ data }) => {
         <ul className="users-chat-list">
           {data.chatUsers.map((user: any) => (
             <li key={user._id}>
+              <Avatar avatarUrl={data.chatImage} username={data.chatName}/>
               <div className="user-info">
                 <p className="link">{user.username}</p>
                 {(data.editChat && data.userId !== user._id) && <p className="link">Remove</p>}
