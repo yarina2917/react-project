@@ -1,0 +1,23 @@
+.modal-header-container {
+  background-color: #5580a3;
+  color: #ffffff;
+  padding: 20px;
+  .modal-header-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    .modal-actions span {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+  .modal-header-data {
+    display: flex;
+    height: 70px;
+    align-items: center;
+    .modal-header-name {
+      margin: 0 auto;
+      font-weight: bold;
+    }
+  }
+}

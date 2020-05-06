@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { Button } from "@material-ui/core";
 
-import authActionsTypes from "../../redux/auth/constants";
+import actions from "../../redux/auth/actions";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const Header = () => {
       <Button color="primary" variant="contained"><NavLink to="/">Chats</NavLink></Button>
       <Button color="primary" variant="contained"><NavLink to="/contacts">Contacts</NavLink></Button>
       <Button color="primary" variant="contained"><NavLink to="/profile">Profile</NavLink></Button>
-      <Button color="primary" variant="contained" onClick={() => dispatch({type: authActionsTypes.LOGOUT_USER})}>Logout</Button>
+      <Button color="primary" variant="contained" onClick={() => dispatch(actions.logoutUser())}>Logout</Button>
     </nav>
   )
 };

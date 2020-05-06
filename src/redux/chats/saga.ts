@@ -13,6 +13,16 @@ function * getChats () {
   }
 }
 
+function * getChat (action: any) {
+  try {
+    const response = yield call(services.chats.getChat, action.payload);
+    yield put({ type: chatsActions.GET_CHAT_INFORMATION_SUCCESS, payload: response.data });
+  } catch (error) {
+    yield put({ type: chatsActions.CHATS_ERROR, payload: error.response.data.message });
+  }
+}
+
 export default {
-  getChats
+  getChats,
+  getChat
 }

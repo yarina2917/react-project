@@ -1,5 +1,7 @@
 import { Chat } from '../ChatMain.interface';
 
 export interface Props {
-  activeChat: Chat
+  activeChat: Chat,
+  userId: string
+  openModal: (data: any) => void,
 }

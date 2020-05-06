@@ -7,6 +7,7 @@ export interface Chat {
   createdAt: string,
   description: string,
   lastMessage: ILastMessage,
+  recipientId: string,
   users: any,
   _id: string,
 }

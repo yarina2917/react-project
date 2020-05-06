@@ -14,6 +14,13 @@ const addContact = (username: string) => {
   });
 };
 
+const checkContact = (contactId: string) => {
+  return api({
+    method: 'GET',
+    url: `/contacts/${contactId}`,
+  });
+};
+
 const deleteContact = (id: string) => {
   return api({
     method: 'DELETE',

@@ -1,0 +1,52 @@
+.chat-settings {
+  padding: 15px;
+  .add-member {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  .users-chat {
+    display: flex;
+    .users-chat-list {
+      width: 100%;
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        .user-info {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+.channel-settings {
+  padding: 15px;
+  .channel-description, .channel-actions {
+    display: flex;
+    align-items: center;
+  }
+  .channel-actions {
+    padding-left: 15px;
+  }
+  .channel-description {
+    margin: 15px 0;
+    padding-left: 15px;
+  }
+}
+
+.contact-info {
+  padding: 15px;
+  display: flex;
+  span {
+    margin-top: 3px;
+  }
+}
+
+.profile-info-container {
+  margin: 20px;
+}
