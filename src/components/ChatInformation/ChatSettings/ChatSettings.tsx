@@ -2,6 +2,8 @@ import React from 'react';
 
 import Avatar from '../../ChatMain/Avatar/Avatar';
 
+import socket from '../../../services/socket';
+
 import { ChatSettingsData as Props } from '../ChatInformations.interface';
 
 import PersonIcon from '@material-ui/icons/Person';
@@ -10,6 +12,9 @@ import ReorderIcon from '@material-ui/icons/Reorder';
 import { CHANNEL } from '../../../constants/chatTypes';
 
 const ChatSettings: React.FC<Props> = ({ data }) => {
+  const removeMember = (userId: string) => {
+    socket.sendEvent('remove-members', {chatId: data.chatId, userId})
+  };
   return (
     <div className="chat-settings">
       <div className="add-member">
@@ -24,8 +29,8 @@ const ChatSettings: React.FC<Props> = ({ data }) => {
               <Avatar avatarUrl={data.chatImage} username={data.chatName}/>
               <div className="user-info">
                 <p className="link">{user.username}</p>
-                {(data.editChat && data.userId !== user._id) && <p className="link">Remove</p>}
-                {(data.type !== CHANNEL && data.userId === user._id) && <p className="link">Delete and exit</p>}
+                {(data.editChat && data.userId !== user._id) && <p className="link" onClick={() => removeMember(user._id)}>Remove</p>}
+                {(data.type !== CHANNEL && data.userId === user._id) && <p className="link" onClick={() => removeMember(user._id)}>Delete and exit</p>}
               </div>
             </li>
           ))}

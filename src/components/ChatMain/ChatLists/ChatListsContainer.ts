@@ -3,18 +3,21 @@ import { bindActionCreators } from 'redux';
 
 import ChatLists from './ChatLists';
 
-import actions from '../../../redux/chats/actions';
+import actions from '../../../redux/actions';
 
 const mapStateToProps = (state: any) => ({
   errorMessage: state.chats.errorMessage,
   chatLists: state.chats.chatLists,
-  activeChatId: state.chats.activeChat._id
+  activeChatId: state.chats.activeChat._id,
+  userId: state.auth.user._id
 });
 
 const mapDispatchToProps = (dispatch: any) => (
   bindActionCreators({
-    getChats: actions.getChats,
-    selectChat: actions.selectChat
+    getChats: actions.chats.getChats,
+    selectChat: actions.chats.selectChat,
+    updateChats: actions.chats.updateChats,
+    closeModal: actions.modal.closeModal
   }, dispatch)
 );
 
