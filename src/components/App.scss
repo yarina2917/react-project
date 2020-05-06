@@ -50,6 +50,13 @@ a {
   margin: 10px 0;
 }
 
+.link {
+  cursor: pointer;
+  &:hover {
+    color: #5580A3;
+  }
+}
+
 nav {
   display: flex;
   justify-content: flex-end;

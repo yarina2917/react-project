@@ -1,10 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { ChatSettingsData as Props } from '../ChatInformations.interface'
+import actions from '../../../redux/auth/actions'
 
-const ProfileSettings: React.FC<Props> = ({ data }) => {
+import { Button } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+const ProfileSettings = () => {
+  const dispatch = useDispatch();
   return (
-    <div>
+    <div className="profile-info-container">
+      <Button color="primary" onClick={() => dispatch(actions.logoutUser())}>
+        <ExitToAppIcon/>
+        <span>Log out</span>
+      </Button>
     </div>
   )
 };

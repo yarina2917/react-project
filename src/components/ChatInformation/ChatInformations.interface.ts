@@ -1,9 +1,6 @@
 export interface ChatInformationProps {
-  data: {
-    type: string,
-    editChat: boolean,
-    chatId: string
-  },
+  data: any,
+  isReady: boolean,
   modalOpen: boolean,
   closeModal: () => void,
   getChatInformation: (data: any) => void
@@ -14,9 +11,10 @@ export interface ChatSettingsData {
     type: string,
     editChat: boolean,
     chatId: string,
-    chatName?: string,
-    channelDescription?: string,
-    chatUsers?: any,
-    chatImage?: string
+    chatName: string,
+    channelDescription: string,
+    chatUsers: any,
+    chatImage: string,
+    userId: string
   }
 }

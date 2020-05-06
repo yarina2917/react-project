@@ -10,7 +10,8 @@ const ChatHeader: React.FC<Props> = ({ activeChat, openModal, userId }) => {
     openModal({
       type: activeChat.chatType,
       editChat: activeChat.chatType === PROFILE || (activeChat.admins.includes(userId) && activeChat.chatType !== DIALOG),
-      chatId: activeChat.chatType === DIALOG ? activeChat.recipientId : activeChat._id
+      chatId: activeChat.chatType === DIALOG ? activeChat.recipientId : activeChat._id,
+      userId
     })
   };
   return (

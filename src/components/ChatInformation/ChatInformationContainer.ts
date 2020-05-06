@@ -6,6 +6,10 @@ import ChatInformation from './ChatInformation';
 import modalActions from '../../redux/modals/actions';
 import chatActions from '../../redux/chats/actions';
 
+const mapStateToProps = (state: any) => ({
+  isReady: state.modals.isReady
+});
+
 const mapDispatchToProps = (dispatch: any) => (
   bindActionCreators({
     closeModal: modalActions.closeModal,
@@ -13,4 +17,4 @@ const mapDispatchToProps = (dispatch: any) => (
   }, dispatch)
 );
 
-export default connect(null, mapDispatchToProps)(ChatInformation)
+export default connect(mapStateToProps, mapDispatchToProps)(ChatInformation)

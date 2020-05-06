@@ -5,7 +5,8 @@ import chatActionTypes from '../chats/constants'
 
 export const initialState = {
   isOpen: false,
-  modalProps: {}
+  isReady: false,
+  modalProps: {},
 };
 
 export default (state = initialState, action: any) => {
@@ -22,13 +23,15 @@ export default (state = initialState, action: any) => {
           chatName: data.username || data.chatName,
           channelDescription: data.description || '',
           chatUsers: data.users || [],
-          chatImage: (data.avatar && data.avatar.url) ? data.avatar.url : ''
-        }}
+          chatImage: (data.avatar && data.avatar.url) ? data.avatar.url : '',
+        }},
+        isReady: {$set: true}
       });
     case actionTypes.CLOSE_DIALOG:
       return update(state, {
         isOpen: {$set: false},
-        modalProps: {$set: {}}
+        isReady: {$set: false},
+        modalProps: {$set: {}},
       });
     default:
       return state
