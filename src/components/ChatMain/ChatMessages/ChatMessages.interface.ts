@@ -3,7 +3,9 @@ import { Chat } from '../ChatMain.interface';
 export interface ChatMessagesProps {
   activeChat: Chat,
   selectedMessages: string[],
-  setSelectedMessage: (data: string[]) => void
+  setSelectedMessage: (data: string[]) => void,
+  modalOpen: boolean,
+  modalData: any
 }
 
 export interface IMessage {

@@ -21,9 +21,11 @@ const MessagesList: React.FC<Props> = ({ activeChat, updateChatMessage }) => {
 
   useEffect(() => {
     services.socket.getMessage((err, data) => {
-      if (!err && data.chatId === activeChat._id) {
+      if (!err) {
         updateChatMessage(data);
-        setMessages(prevMessages => [data, ...prevMessages]);
+        if (data.chatId === activeChat._id) {
+          setMessages(prevMessages => [data, ...prevMessages]);
+        }
       }
     });
     services.socket.deleteMessage((err, data) => {

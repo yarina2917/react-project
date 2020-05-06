@@ -2,15 +2,16 @@ import React from 'react';
 
 import TextEditor from './TextEditor/TextEditor';
 import MessagesList from './MessagesList/MessagesListContainer';
+import ChatInformation from '../../ChatInformation/ChatInformationContainer'
+
+import services from '../../../services';
+
 import MessagesActions from './MessagesActions/MessagesActions';
-
-import services from '../../../services'
-
 import { ChatMessagesProps as Props } from './ChatMessages.interface';
 
 import './style.scss';
 
-const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelectedMessage }) => {
+const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelectedMessage, modalOpen, modalData }) => {
   const handleDelete = () => {
     services.socket.getSocket().emit('delete-messages', {
       messages: selectedMessages,
@@ -34,6 +35,7 @@ const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelect
           <p>Please select a chat to start messaging</p>
          </div>
        )}
+       {modalOpen && <ChatInformation data={modalData} modalOpen={modalOpen}/>}
      </div>
   )
 };

@@ -1,11 +1,20 @@
 import api from './api';
 
+import { PROFILE, DIALOG } from '../constants/chatTypes';
+
 import store from '../redux/store';
 
 const getChats = () => {
   return api({
     method: 'GET',
     url: '/chats',
+  });
+};
+
+const getChat = (data: any) => {
+  return api({
+    method: 'GET',
+    url: (data.chatType === PROFILE || data.chatType === DIALOG) ? `/users/${data.chatId}` : `/chats/${data.chatId}`
   });
 };
 
@@ -41,6 +50,7 @@ const normalizeMessage = (message: any) => {
 
 export default {
   getChats,
+  getChat,
   getMessages,
   updateLastMessage
 }

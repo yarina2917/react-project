@@ -7,6 +7,7 @@ import authActions from './constants'
 function * watchChats () {
   yield all([
     takeLatest(authActions.GET_CHATS, chatsSaga.getChats),
+    takeLatest(authActions.GET_CHAT_INFORMATION, chatsSaga.getChat),
   ])
 }
 
