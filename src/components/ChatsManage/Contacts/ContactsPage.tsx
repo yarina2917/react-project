@@ -6,7 +6,7 @@ import AddNewContact from './AddNewContact/AddNewContact'
 import ContactsList from './ContactsList/ContactsList'
 
 import { IContact } from './Contact.interface';
-import services from '../../services/contacts';
+import services from '../../../services/contacts';
 
 const Contacts = () => {
   const [contacts, setContacts] = useState<IContact[]>([]);

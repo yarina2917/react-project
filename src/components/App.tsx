@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { Route, Switch, useLocation }  from 'react-router-dom'
 
 import ChatMain from './ChatMain/ChatMain'
-import ContactsPage from './Contacts/ContactsPage'
+import ChatsManagePage from './ChatsManage/ChatsManage'
 import ProfilePage from './Profile/ProfileContainer'
 import RegistrationPage from './Registration/RegistrationContainer'
 import LoginPage from './Login/LoginContainer'
@@ -29,7 +29,7 @@ const App: React.FC<Props> = ({ getUser, isReady }) => {
         {!['/login', '/registration'].includes(pathname) && <Header/>}
         <Switch>
           <PrivateRoute exact path="/" component={ChatMain}/>
-          <PrivateRoute path="/contacts" component={ContactsPage}/>
+          <PrivateRoute path="/chats-manage" component={ChatsManagePage}/>
           <PrivateRoute path="/profile" component={ProfilePage}/>
           <Route path="/registration" component={RegistrationPage}/>
           <Route path="/login" component={LoginPage}/>

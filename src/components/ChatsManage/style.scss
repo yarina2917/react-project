@@ -1,0 +1,13 @@
+.manage-chats-container {
+  display: flex;
+  .manage-chats-nav {
+    margin: 50px 0 0 50px;
+    li {
+      border: 1px solid gray;
+      margin-bottom: 15px;
+    }
+  }
+  .manage-chats {
+    margin: 0 auto;
+  }
+}

@@ -10,7 +10,6 @@ import { ChatSettingsData as Props } from '../ChatInformations.interface';
 import { CHANNEL } from '../../../constants/chatTypes';
 import actions from '../../../redux/chats/actions';
 
-import PersonIcon from '@material-ui/icons/Person';
 import ReorderIcon from '@material-ui/icons/Reorder';
 
 const ChatSettings: React.FC<Props> = ({ data }) => {
@@ -23,10 +22,6 @@ const ChatSettings: React.FC<Props> = ({ data }) => {
   };
   return (
     <div className="chat-settings">
-      <div className="add-member">
-        <PersonIcon/>
-        <span className="link">Add members</span>
-      </div>
       <div className="users-chat">
         <ReorderIcon/>
         <ul className="users-chat-list">
@@ -34,7 +29,7 @@ const ChatSettings: React.FC<Props> = ({ data }) => {
             <li key={user._id}>
               <Avatar avatarUrl={data.chatImage} username={data.chatName}/>
               <div className="user-info">
-                <p className="link">{user.username}</p>
+                <p>{user.username}</p>
                 {(data.editChat && data.userId !== user._id) && <p className="link" onClick={() => removeMember(user._id, true)}>Remove</p>}
                 {(data.type !== CHANNEL && data.userId === user._id) && <p className="link" onClick={() => removeMember(user._id)}>Delete and exit</p>}
               </div>
