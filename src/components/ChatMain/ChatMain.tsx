@@ -3,6 +3,7 @@ import React from 'react';
 import ChatHeader from './ChatHeader/ChatHeaderContainer';
 import ChatLists from './ChatLists/ChatListsContainer';
 import ChatMessages from './ChatMessages/ChatMessageContainer';
+import ChatModal from './ChatModal/ChatModalContainer';
 
 import './style.scss';
 
@@ -14,6 +15,7 @@ const ChatMain = () => {
         <ChatLists/>
         <ChatMessages/>
       </div>
+      <ChatModal/>
     </div>
   )
 };

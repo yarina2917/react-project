@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import ChatsListsManage from './ChatsListsManage/ChatsListsManage';
+import ChatsListsManage from './ChatsListsManage/ChatsListsManageContainer';
 import Contacts from './Contacts/ContactsPage';
 import NewChat from './NewChat/NewChat';
 
