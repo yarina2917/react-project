@@ -21,3 +21,7 @@ interface ILastMessage {
   updatedAt: string,
   _id: string
 }
+
+export interface chatModalProps {
+  isModalOpen: boolean
+}

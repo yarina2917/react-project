@@ -8,7 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { AddContactProps as Props } from '../Contact.interface';
-import services from '../../../services/contacts';
+import services from '../../../../services/contacts';
 
 const AddNewContact: React.FC<Props> = ({ addContact }) => {
   const [isOpen, setOpen] = useState<boolean>(false);

@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <nav>
       <Button color="primary" variant="contained"><NavLink to="/">Chats</NavLink></Button>
-      <Button color="primary" variant="contained"><NavLink to="/contacts">Contacts</NavLink></Button>
+      <Button color="primary" variant="contained"><NavLink to="/chats-manage">Chats manage</NavLink></Button>
       <Button color="primary" variant="contained"><NavLink to="/profile">Profile</NavLink></Button>
       <Button color="primary" variant="contained" onClick={() => dispatch(actions.logoutUser())}>Logout</Button>
     </nav>
