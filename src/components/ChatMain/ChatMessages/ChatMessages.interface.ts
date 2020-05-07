@@ -1,19 +1,23 @@
-import { Chat } from '../ChatMain.interface';
+import { IChat } from '../ChatMain.interface';
 
 export interface ChatMessagesProps {
-  activeChat: Chat,
+  activeChat: IChat,
+  username: string,
   selectedMessages: string[],
-  setSelectedMessage: (data: string[]) => void,
-  modalOpen: boolean,
-  modalData: any
+  setSelectedMessage: (data: string[]) => void
 }
 
 export interface IMessage {
   _id: string;
-  message: string;
-  user: any;
   createdAt: string;
-  selected: boolean;
-  messageType: string;
   chatId: string;
+  message: string;
+  messageType: string;
+  selected: boolean;
+  user: {
+    _id: string,
+    username: string,
+    avatar: string,
+    selected: boolean
+  }
 }

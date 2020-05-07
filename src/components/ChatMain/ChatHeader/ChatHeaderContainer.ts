@@ -7,7 +7,8 @@ import actions from '../../../redux/modals/actions';
 
 const mapStateToProps = (state: any) => ({
   activeChat: state.chats.activeChat,
-  userId: state.auth.user._id
+  userId: state.auth.user._id,
+  isModalOpen: state.modals.isOpen
 });
 
 const mapDispatchToProps = (dispatch: any) => (

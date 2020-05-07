@@ -1,17 +1,17 @@
-import { Chat } from '../ChatMain.interface';
+import { IChat } from '../ChatMain.interface';
 
 export interface ChatListsProps {
-  chatLists: Chat[],
+  chatLists: IChat[],
   activeChatId: string,
   userId: string,
   getChats: () => void,
-  selectChat: (chat: Chat | {}) => void,
-  updateChats: (data: Chat[]) => void,
+  selectChat: (chat: IChat | {}) => void,
+  updateChats: (data: IChat[]) => void,
   closeModal: () => void
 }
 
 export interface ChatPreviewProps {
-  chat: Chat,
+  chat: IChat,
   activeChatId: string,
-  selectChat: (chat: Chat | {}) => void
+  selectChat: (chat: IChat | {}) => void
 }

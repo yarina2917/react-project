@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Avatar from '../../ChatMain/Avatar/Avatar';
 
@@ -6,14 +7,19 @@ import socket from '../../../services/socket';
 
 import { ChatSettingsData as Props } from '../ChatInformations.interface';
 
+import { CHANNEL } from '../../../constants/chatTypes';
+import actions from '../../../redux/chats/actions';
+
 import PersonIcon from '@material-ui/icons/Person';
 import ReorderIcon from '@material-ui/icons/Reorder';
 
-import { CHANNEL } from '../../../constants/chatTypes';
-
 const ChatSettings: React.FC<Props> = ({ data }) => {
-  const removeMember = (userId: string) => {
-    socket.sendEvent('remove-members', {chatId: data.chatId, userId})
+  const dispatch = useDispatch();
+  const removeMember = (userId: string, removeUser?: boolean) => {
+    socket.sendEvent('remove-members', {chatId: data.chatId, userId});
+    if (removeUser) {
+      dispatch(actions.updateChatInformation({chatUsers: data.chatUsers.filter((user: any) => user._id !== userId)}))
+    }
   };
   return (
     <div className="chat-settings">
@@ -29,7 +35,7 @@ const ChatSettings: React.FC<Props> = ({ data }) => {
               <Avatar avatarUrl={data.chatImage} username={data.chatName}/>
               <div className="user-info">
                 <p className="link">{user.username}</p>
-                {(data.editChat && data.userId !== user._id) && <p className="link" onClick={() => removeMember(user._id)}>Remove</p>}
+                {(data.editChat && data.userId !== user._id) && <p className="link" onClick={() => removeMember(user._id, true)}>Remove</p>}
                 {(data.type !== CHANNEL && data.userId === user._id) && <p className="link" onClick={() => removeMember(user._id)}>Delete and exit</p>}
               </div>
             </li>

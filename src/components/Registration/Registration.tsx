@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom'
 
 import { useFormik } from 'formik';
@@ -9,7 +9,14 @@ import { Props } from './Registration.interface';
 import { Button, TextField } from '@material-ui/core';
 import './style.scss'
 
-const Registration: React.FC<Props> = ({ errorMessage, createUser }) => {
+const Registration: React.FC<Props> = ({ errorMessage, createUser, clearError }) => {
+
+  useEffect(() => {
+    if (errorMessage) {
+      clearError()
+    }
+  },[]);
+
   const form = useFormik({
     initialValues: {
       username: '',

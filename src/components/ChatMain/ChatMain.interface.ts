@@ -1,4 +1,4 @@
-export interface Chat {
+export interface IChat {
   admins: any,
   author: string,
   avatar: any,

@@ -1,11 +1,13 @@
 import React from 'react';
 
+import ChatInformation from '../../ChatInformation/ChatInformationContainer';
+
 import { DIALOG, PROFILE } from '../../../constants/chatTypes';
 import { Props } from './ChatHeader.interface';
 
 import './style.scss';
 
-const ChatHeader: React.FC<Props> = ({ activeChat, openModal, userId }) => {
+const ChatHeader: React.FC<Props> = ({ activeChat, openModal, userId, isModalOpen }) => {
   const openChatSetting = () => {
     openModal({
       type: activeChat.chatType,
@@ -23,6 +25,7 @@ const ChatHeader: React.FC<Props> = ({ activeChat, openModal, userId }) => {
           {activeChat.chatType !== DIALOG && <span>{activeChat.users?.length} members</span>}
         </div>
       )}
+      {isModalOpen && <ChatInformation isModalOpen={isModalOpen}/>}
     </div>
   )
 };

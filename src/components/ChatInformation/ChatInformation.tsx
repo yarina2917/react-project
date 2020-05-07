@@ -13,14 +13,14 @@ import { CHANNEL, GROUP, DIALOG, PROFILE } from '../../constants/chatTypes';
 import Dialog from '@material-ui/core/Dialog/Dialog';
 import './styles.scss';
 
-const ChatInformation: React.FC<Props> = ({ data, modalOpen, closeModal, getChatInformation, isReady }) => {
+const ChatInformation: React.FC<Props> = ({ data, isModalOpen, closeModal, getChatInformation, isReady }) => {
   useEffect(() => {
     getChatInformation({chatType: data.type, chatId: data.chatId})
-  }, [modalOpen]);
+  }, [isModalOpen]);
   return (
     <>
       {isReady && (
-        <Dialog open={modalOpen} onClose={() => closeModal()} aria-labelledby="form-dialog-title" fullWidth={true} maxWidth={"xs"}>
+        <Dialog open={isModalOpen} onClose={() => closeModal()} aria-labelledby="form-dialog-title" fullWidth={true} maxWidth={"xs"}>
           <div>
             <ModalHeader data={data}/>
             { data.type === PROFILE && <ProfileSettings/> }
