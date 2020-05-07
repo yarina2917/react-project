@@ -2,7 +2,6 @@ import React from 'react';
 
 import TextEditor from './TextEditor/TextEditor';
 import MessagesList from './MessagesList/MessagesListContainer';
-import ChatInformation from '../../ChatInformation/ChatInformationContainer'
 
 import socket from '../../../services/socket';
 
@@ -11,7 +10,7 @@ import { ChatMessagesProps as Props } from './ChatMessages.interface';
 
 import './style.scss';
 
-const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelectedMessage, modalOpen, modalData }) => {
+const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelectedMessage, username }) => {
   const handleDelete = () => {
     socket.sendEvent('delete-messages', {
       messages: selectedMessages,
@@ -24,7 +23,7 @@ const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelect
        {activeChat?._id && (
         <>
           <MessagesList activeChat={activeChat}/>
-          { !selectedMessages.length && <TextEditor activeChat={activeChat}/> }
+          { !selectedMessages.length && <TextEditor activeChat={activeChat} username={username}/> }
           { selectedMessages.length && (
             <MessagesActions cancelSelect={() => setSelectedMessage([])} deleteMessages={handleDelete}/>
           )}
@@ -35,7 +34,6 @@ const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelect
           <p>Please select a chat to start messaging</p>
          </div>
        )}
-       {modalOpen && <ChatInformation data={modalData} modalOpen={modalOpen}/>}
      </div>
   )
 };

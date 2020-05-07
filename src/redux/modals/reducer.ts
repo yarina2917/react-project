@@ -27,6 +27,10 @@ export default (state = initialState, action: any) => {
         }},
         isReady: {$set: true}
       });
+    case chatActionTypes.UPDATE_CHAT_INFORMATION:
+      return update(state, {
+        modalProps: {$merge: action.payload}
+      });
     case actionTypes.CLOSE_DIALOG:
       return update(state, {
         isOpen: {$set: false},

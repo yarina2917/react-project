@@ -1,6 +1,7 @@
-import { Chat } from "../../ChatMain.interface";
+import { IChat } from '../../ChatMain.interface';
+import { IMessage } from '../ChatMessages.interface';
 
 export interface MessagesListInterface {
-  activeChat: Chat,
-  updateChatMessage: (data: any) => void
+  activeChat: IChat,
+  updateChatMessage: (data: IMessage) => void
 }

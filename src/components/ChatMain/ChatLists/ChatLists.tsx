@@ -21,7 +21,7 @@ const ChatLists: React.FC<Props> = ({ chatLists, activeChatId, userId, getChats,
     }
   }, [userId, activeChatId]);
 
-  const deleteChat = (data: any, isDelete?: boolean) => {
+  const deleteChat = (data: {userId: string, chatId: string}, isDelete?: boolean) => {
     if (data.userId === userId || isDelete) {
       updateChats(chatLists.filter(chat => chat._id !== data.chatId));
       if (activeChatId === data.chatId) {

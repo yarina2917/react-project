@@ -10,7 +10,10 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => (
-  bindActionCreators({ createUser: actions.createUser }, dispatch)
+  bindActionCreators({
+    createUser: actions.createUser,
+    clearError: actions.clearUserError
+  }, dispatch)
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration)

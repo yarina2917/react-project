@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import Avatar from '../../ChatMain/Avatar/Avatar';
 
-import actions from '../../../redux/modals/actions'
+import actions from '../../../redux/modals/actions';
 
 import { ChatSettingsData as Props } from '../ChatInformations.interface';
 

@@ -1,10 +1,6 @@
-import { Chat } from '../../ChatMain.interface';
+import { IChat } from '../../ChatMain.interface';
 
 export interface TextEditorProps {
-  activeChat: Chat
-}
-
-export interface IUsersTyping {
-  username: string,
-  chatId: string
+  activeChat: IChat,
+  username: string
 }

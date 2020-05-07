@@ -7,6 +7,10 @@ const setSocket = (userId: string) => {
   socket = openSocket(`${config.api}?userId=${userId}`);
 };
 
+const disconnectSocket = () => {
+  socket.disconnect()
+};
+
 const clearSubscribe = (data: string[]) => {
   data.forEach((event) => socket.off(event))
 };
@@ -41,14 +45,25 @@ const deleteChat = (cb: Callback) => {
   socket.on('notify-delete-chat', (data: any) => cb(null, data));
 };
 
+const typingMessage = (cb: Callback) => {
+  socket.on('notify-typing', (data: any) => cb(null, data));
+};
+
+const stopTyping = (cb: Callback) => {
+  socket.on('notify-stop-typing', (data: any) => cb(null, data));
+};
+
 export default {
   sendEvent,
   setSocket,
+  disconnectSocket,
   clearSubscribe,
   getMessage,
   deleteMessage,
   addChat,
   addMembers,
   removeMembers,
-  deleteChat
+  deleteChat,
+  typingMessage,
+  stopTyping
 }

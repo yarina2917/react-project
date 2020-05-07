@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik'
@@ -9,7 +9,14 @@ import { Props } from './Login.interface';
 
 import '../Registration/style.scss'
 
-const Login: React.FC<Props> = ({ errorMessage, loginUser }) => {
+const Login: React.FC<Props> = ({ errorMessage, loginUser, clearError }) => {
+
+  useEffect(() => {
+    if (errorMessage) {
+      clearError()
+    }
+  },[]);
+
   const form = useFormik({
     initialValues: {
       username: '',

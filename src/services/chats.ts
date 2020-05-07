@@ -26,6 +26,13 @@ const getMessages = (lastMessageDate: string) => {
   });
 };
 
+const deleteContact = (contactId: string) => {
+  return api({
+    method: 'DELETE',
+    url: `/contacts/${contactId}`,
+  });
+};
+
 const deleteChannel = () => {
   const chatId = store.getState().chats.activeChat._id;
   return api({
@@ -61,5 +68,6 @@ export default {
   getChat,
   getMessages,
   updateLastMessage,
+  deleteContact,
   deleteChannel
 }

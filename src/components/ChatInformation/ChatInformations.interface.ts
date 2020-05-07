@@ -1,9 +1,9 @@
 export interface ChatInformationProps {
   data: any,
   isReady: boolean,
-  modalOpen: boolean,
+  isModalOpen: boolean,
   closeModal: () => void,
-  getChatInformation: (data: any) => void
+  getChatInformation: (data: {chatType: string, chatId: string}) => void
 }
 
 export interface ChatSettingsData {

@@ -6,7 +6,8 @@ import ChatInformation from './ChatInformation';
 import actions from '../../redux/actions';
 
 const mapStateToProps = (state: any) => ({
-  isReady: state.modals.isReady
+  isReady: state.modals.isReady,
+  data: state.modals.modalProps
 });
 
 const mapDispatchToProps = (dispatch: any) => (

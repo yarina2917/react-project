@@ -1,7 +1,13 @@
-import { Chat } from '../ChatMain.interface';
+import { IChat } from '../ChatMain.interface';
 
 export interface Props {
-  activeChat: Chat,
-  userId: string
-  openModal: (data: any) => void,
+  activeChat: IChat,
+  userId: string,
+  isModalOpen: boolean,
+  openModal: (data: {
+    type: string,
+    editChat: boolean,
+    chatId: string,
+    userId: string
+  }) => void,
 }

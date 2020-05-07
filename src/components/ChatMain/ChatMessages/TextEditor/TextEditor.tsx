@@ -1,35 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import Avatar from '../../Avatar/Avatar';
 
-import { TextEditorProps as Props, IUsersTyping } from './TextEditor.inteface';
+import { TextEditorProps as Props } from './TextEditor.inteface';
 
-import socketService from '../../../../services/socket';
+import socket from '../../../../services/socket';
 import store from '../../../../redux/store';
 
 import { Button, TextField } from '@material-ui/core';
 import './style.scss';
 
-const TextEditor: React.FC<Props> = ({ activeChat }) => {
-  const [usersTyping, setUsersTyping] = useState<IUsersTyping[]>([]);
+const TextEditor: React.FC<Props> = ({ activeChat, username }) => {
+  const [usersTyping, setUsersTyping] = useState<string[]>([]);
+  const [startTyping, setStartTyping] = useState<boolean>(false);
   const [textMessage, setTextMessage] = useState<string>('');
+
+  const typingTimeout: any = useRef();
 
   useEffect(() => setTextMessage(''), [activeChat._id]);
 
+  useEffect(() => {
+    socket.typingMessage((err, data) => {
+      if (activeChat._id === data.chatId && !usersTyping.includes(data.username)) {
+        setUsersTyping((prevUsersTyping) => [...prevUsersTyping, data.username]);
+      }
+    });
+    socket.stopTyping((err, data) => {
+      if (activeChat._id === data.chatId) {
+        setUsersTyping((prevUsersTyping) => prevUsersTyping.filter(username => username !== data.username))
+      }
+    });
+    return () => {
+      socket.clearSubscribe(['notify-typing', 'notify-stop-typing'])
+    }
+  }, [activeChat._id, username]);
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    clearTimeout(typingTimeout);
     if (e.key === 'Enter') {
       sendMessage();
+    } else {
+      const messageData = {
+        username,
+        chatId: activeChat._id
+      };
+      if (!startTyping) {
+        socket.sendEvent('typing', messageData);
+        setStartTyping(true);
+      }
+      typingTimeout.current = setTimeout(() => {
+        socket.sendEvent('stop-typing', messageData);
+        setStartTyping(false);
+      }, 3000)
     }
   };
 
   const sendMessage = () => {
     if (textMessage.trim().length) {
-      socketService.sendEvent('message', {
+      socket.sendEvent('message', {
         authorId: store.getState().auth.user._id,
         chatId: activeChat._id,
         message: textMessage
       });
       setTextMessage('');
+      setStartTyping(false);
+      clearTimeout(typingTimeout);
     }
   };
 
