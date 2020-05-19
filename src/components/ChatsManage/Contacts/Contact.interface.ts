@@ -8,6 +8,6 @@ export interface AddContactProps {
 }
 
 export interface ContactsListProps {
-  deleteContact: (id: string) => void,
-  contacts: IContact[]
+  contacts: IContact[],
+  deleteContact: (id: string) => void
 }

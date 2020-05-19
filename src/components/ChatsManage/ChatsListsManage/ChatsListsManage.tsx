@@ -16,7 +16,7 @@ const ChatsListsManage: React.FC<Props> = ({ getChats, chatLists, userId }) => {
       <h2>Chat lists</h2>
       <ul className="chat-lists-manage">
         {chatLists.map(chat => (
-          <li>
+          <li key={chat._id}>
             <Avatar avatarUrl={chat.avatar?.url} username={chat.chatName}/>
             <h3>{chat.chatName}</h3>
             <p>Type: {chat.chatType}</p>

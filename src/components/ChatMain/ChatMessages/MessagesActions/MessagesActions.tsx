@@ -7,8 +7,8 @@ import { Button } from '@material-ui/core';
 const MessagesActions: React.FC<Props> = ({ cancelSelect, deleteMessages }) => {
   return (
     <div className="message-select-container">
-      <Button color="primary" variant="contained" onClick={() => deleteMessages()}>Delete</Button>
-      <Button color="primary" onClick={() => cancelSelect()}>Cancel</Button>
+      <Button color="primary" variant="contained" onClick={deleteMessages}>Delete</Button>
+      <Button color="primary" onClick={cancelSelect}>Cancel</Button>
     </div>
   )
 };

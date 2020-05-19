@@ -8,9 +8,10 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const ProfileSettings = () => {
   const dispatch = useDispatch();
+  const logoutUser = () => dispatch(actions.logoutUser());
   return (
     <div className="profile-info-container">
-      <Button color="primary" onClick={() => dispatch(actions.logoutUser())}>
+      <Button color="primary" onClick={logoutUser}>
         <ExitToAppIcon/>
         <span>Log out</span>
       </Button>

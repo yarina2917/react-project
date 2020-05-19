@@ -8,7 +8,8 @@ import actions from '../../../redux/chats/actions';
 const mapStateToProps = (state: any) => ({
   activeChat: state.chats.activeChat,
   selectedMessages: state.chats.selectedMessages,
-  username: state.auth.user.username
+  username: state.auth.user.username,
+  userId: state.auth.user._id
 });
 
 const mapDispatchToProps = (dispatch: any) => (
