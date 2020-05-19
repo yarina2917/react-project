@@ -10,7 +10,7 @@ import { ChatMessagesProps as Props } from './ChatMessages.interface';
 
 import './style.scss';
 
-const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelectedMessage, username }) => {
+const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelectedMessage, username, userId }) => {
   const handleDelete = () => {
     socket.sendEvent('delete-messages', {
       messages: selectedMessages,
@@ -23,7 +23,7 @@ const ChatMessages: React.FC<Props> = ({ activeChat, selectedMessages, setSelect
        {activeChat?._id && (
         <>
           <MessagesList activeChat={activeChat}/>
-          { !selectedMessages.length && <TextEditor activeChat={activeChat} username={username}/> }
+          { !selectedMessages.length && <TextEditor activeChat={activeChat} username={username} userId={userId}/> }
           { selectedMessages.length && (
             <MessagesActions cancelSelect={() => setSelectedMessage([])} deleteMessages={handleDelete}/>
           )}

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Avatar from '../../Avatar/Avatar';
-
-import { TextEditorProps as Props } from './TextEditor.inteface';
 
 import socket from '../../../../services/socket';
 import store from '../../../../redux/store';
@@ -10,7 +9,12 @@ import store from '../../../../redux/store';
 import { Button, TextField } from '@material-ui/core';
 import './style.scss';
 
-const TextEditor: React.FC<Props> = ({ activeChat, username }) => {
+import actions from '../../../../redux/modals/actions';
+import { TextEditorProps as Props } from './TextEditor.inteface';
+import { DIALOG, PROFILE } from '../../../../constants/chatTypes';
+
+const TextEditor: React.FC<Props> = ({ activeChat, username, userId }) => {
+  const dispatch = useDispatch();
   const [usersTyping, setUsersTyping] = useState<string[]>([]);
   const [startTyping, setStartTyping] = useState<boolean>(false);
   const [textMessage, setTextMessage] = useState<string>('');
@@ -68,13 +72,31 @@ const TextEditor: React.FC<Props> = ({ activeChat, username }) => {
     }
   };
 
+  const openChatInfo = () => {
+    dispatch(actions.openModal({
+      type: activeChat.chatType,
+      editChat: activeChat.admins.includes(userId) && activeChat.chatType !== DIALOG,
+      chatId: activeChat.chatType === DIALOG ? activeChat.recipientId : activeChat._id,
+      userId
+    }))
+  };
+
+  const openProfileInfo = () => {
+    dispatch(actions.openModal({
+      type: PROFILE,
+      editChat: true,
+      chatId: userId,
+      userId
+    }))
+  };
+
   return (
     <div className="editor-container">
       { usersTyping.length === 1 && <p className="typing">{usersTyping[0]} is typing...</p> }
       { usersTyping.length > 1 && <p className="typing">{usersTyping.length} persons are typing...</p> }
       <div className="editor-input-container">
-        <div className="img-container">
-          <Avatar avatarUrl={activeChat.avatar?.url} username={activeChat.chatName}/>
+        <div className="img-container" onClick={openProfileInfo}>
+          <Avatar avatarUrl={activeChat.avatar?.url} username={username}/>
         </div>
         <TextField
           id="filled-basic"
@@ -85,7 +107,7 @@ const TextEditor: React.FC<Props> = ({ activeChat, username }) => {
           onChange={e => setTextMessage(e.target.value)}
           onKeyDown={handleKeyDown}
         />
-        <div className="img-container">
+        <div className="img-container" onClick={openChatInfo}>
           <Avatar avatarUrl={activeChat.avatar?.url} username={activeChat.chatName}/>
         </div>
       </div>

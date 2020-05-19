@@ -27,7 +27,10 @@ const ChatsManage = () => {
     <div className="manage-chats-container">
       <ul className="manage-chats-nav">
         {menuConfig.map(item => (
-          <li onClick={() => setActiveMenu(item.value)} className={classNames({'active-item': activeMenu === item.value})}>
+          <li key={item.value}
+            onClick={() => setActiveMenu(item.value)}
+            className={classNames({'active-item': activeMenu === item.value})}
+          >
             <Button color="primary">{item.title}</Button>
           </li>
         ))}

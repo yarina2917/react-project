@@ -3,6 +3,7 @@ import { IChat } from '../ChatMain.interface';
 export interface ChatMessagesProps {
   activeChat: IChat,
   username: string,
+  userId: string,
   selectedMessages: string[],
   setSelectedMessage: (data: string[]) => void
 }
