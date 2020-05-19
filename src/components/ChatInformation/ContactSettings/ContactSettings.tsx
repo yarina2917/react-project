@@ -13,7 +13,7 @@ const ContactSettings: React.FC<Props> = ({ data }) => {
   return (
     <div className="contact-info">
       <ReorderIcon/>
-      <span className="link" onClick={() => deleteContact()}>Delete contact</span>
+      <span className="link" onClick={deleteContact}>Delete contact</span>
     </div>
   )
 };

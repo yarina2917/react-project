@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
 import { Props } from './Registration.interface';
 
 import { Button, TextField } from '@material-ui/core';
-import './style.scss'
+import './style.scss';
 
 const Registration: React.FC<Props> = ({ errorMessage, createUser, clearError }) => {
 
@@ -50,9 +50,7 @@ const Registration: React.FC<Props> = ({ errorMessage, createUser, clearError })
           id="username"
           label="Username"
           type="text"
-          onChange={form.handleChange}
-          onBlur={form.handleBlur}
-          value={form.values.username}
+          {...form.getFieldProps('username')}
         />
         <TextField
           error={!!(form.touched.password && form.errors.password)}
@@ -60,9 +58,7 @@ const Registration: React.FC<Props> = ({ errorMessage, createUser, clearError })
           id="password"
           label="Password"
           type="password"
-          onChange={form.handleChange}
-          onBlur={form.handleBlur}
-          value={form.values.password}
+          {...form.getFieldProps('password')}
         />
         <TextField
           error={!!(form.touched.confirmPassword && form.errors.confirmPassword)}
@@ -70,9 +66,7 @@ const Registration: React.FC<Props> = ({ errorMessage, createUser, clearError })
           id="confirmPassword"
           label="Confirm Password"
           type="password"
-          onChange={form.handleChange}
-          onBlur={form.handleBlur}
-          value={form.values.confirmPassword}
+          {...form.getFieldProps('confirmPassword')}
         />
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <Button className="submit-form" type="submit" variant="contained" color="primary" disabled={!form.dirty || !form.isValid}>Submit</Button>

@@ -11,13 +11,14 @@ import './style.scss';
 
 const ModalHeader: React.FC<Props> = ({ data }) => {
   const dispatch = useDispatch();
+  const closeModal = () => dispatch(actions.closeModal());
   return (
     <div className="modal-header-container">
       <div className="modal-header-actions">
         <span>Settings</span>
         <div className="modal-actions">
           {data.editChat && <span>Edit</span>}
-          <span onClick={() => dispatch(actions.closeModal())}>Close</span>
+          <span onClick={closeModal}>Close</span>
         </div>
       </div>
       <div className="modal-header-data">

@@ -8,11 +8,15 @@ const Profile: React.FC<Props> = ({ user, errorMessage, clearUserError, updateUs
   const [newName, setNewName] = useState<string>(user.username);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
-  const update = () => {
-    updateUser({userId: user._id, data: {username: newName}, callback: () => setIsEdit(false)});
+  const updateUserInfo = () => {
+    updateUser({
+      userId: user._id,
+      data: {username: newName},
+      callback: () => setIsEdit(false)
+    });
   };
 
-  const cancel = () => {
+  const cancelUpdate = () => {
     setIsEdit(false);
     setNewName(user.username);
     if (errorMessage) {
@@ -39,8 +43,8 @@ const Profile: React.FC<Props> = ({ user, errorMessage, clearUserError, updateUs
               value={newName}
               onChange={e => setNewName(e.target.value)}
             />
-            <Button color="primary" onClick={() => update()}>Save</Button>
-            <Button color="primary" onClick={() => cancel()}>Cancel</Button>
+            <Button color="primary" onClick={updateUserInfo}>Save</Button>
+            <Button color="primary" onClick={cancelUpdate}>Cancel</Button>
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
        </div>

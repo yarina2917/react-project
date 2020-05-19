@@ -1,11 +1,6 @@
 import React, {useState} from 'react';
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
 
 import { AddContactProps as Props } from '../Contact.interface';
 import services from '../../../../services/contacts';
@@ -52,8 +47,8 @@ const AddNewContact: React.FC<Props> = ({ addContact }) => {
         </DialogContent>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <DialogActions>
-          <Button onClick={(e) => handleAddContact(e)} color="primary">Add</Button>
-          <Button onClick={() => closeModal()} color="primary">Cancel</Button>
+          <Button onClick={handleAddContact} color="primary">Add</Button>
+          <Button onClick={closeModal} color="primary">Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>

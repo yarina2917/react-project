@@ -6,6 +6,12 @@
     li {
       border: 1px solid gray;
       margin-bottom: 15px;
+      .MuiButton-root {
+        width: 100%;
+      }
+      &.active-item {
+        background-color: rgba(174, 174, 189, 0.5);
+      }
     }
   }
   .manage-chats {

@@ -89,7 +89,7 @@ const TextEditor: React.FC<Props> = ({ activeChat, username }) => {
           <Avatar avatarUrl={activeChat.avatar?.url} username={activeChat.chatName}/>
         </div>
       </div>
-      <Button color="primary" className="send-message" onClick={() => sendMessage()}>Send</Button>
+      <Button color="primary" className="send-message" onClick={sendMessage}>Send</Button>
     </div>
   )
 };

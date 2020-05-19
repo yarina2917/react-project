@@ -18,7 +18,7 @@ const ChatHeader: React.FC<Props> = ({ activeChat, openModal, userId }) => {
     <div className="chat-header">
       <div className="chat-header-settings"></div>
       {activeChat?._id && (
-        <div className="chat-header-info" onClick={() => openChatSetting()}>
+        <div className="chat-header-info" onClick={openChatSetting}>
           <span>{activeChat.chatName} </span>
           {activeChat.chatType !== DIALOG && <span>{activeChat.users?.length} members</span>}
         </div>

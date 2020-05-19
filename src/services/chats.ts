@@ -1,6 +1,6 @@
 import api from './api';
 
-import { PROFILE, DIALOG } from '../constants/chatTypes';
+import { PROFILE, DIALOG, CHANNEL, GROUP } from '../constants/chatTypes';
 
 import store from '../redux/store';
 
@@ -15,6 +15,26 @@ const getChat = (data: any) => {
   return api({
     method: 'GET',
     url: (data.chatType === PROFILE || data.chatType === DIALOG) ? `/users/${data.chatId}` : `/chats/${data.chatId}`
+  });
+};
+
+interface ICreateChat {
+  chatName: string,
+  chatType: typeof CHANNEL | typeof GROUP,
+  description: string,
+  users: string[];
+}
+
+const createChat = ({chatName, chatType, description, users}: ICreateChat) => {
+  return api({
+    method: 'POST',
+    url: '/chats',
+    data: {
+      chatName,
+      chatType,
+      description,
+      users
+    }
   });
 };
 
@@ -66,6 +86,7 @@ const normalizeMessage = (message: any) => {
 export default {
   getChats,
   getChat,
+  createChat,
   getMessages,
   updateLastMessage,
   deleteContact,

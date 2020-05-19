@@ -28,13 +28,13 @@ const ChanelSettings: React.FC<Props> = ({ data }) => {
       {!data.editChat && (
         <div className="channel-actions">
           <ReorderIcon/>
-          <span className="link" onClick={() => leaveChannel()}>Leave channel</span>
+          <span className="link" onClick={leaveChannel}>Leave channel</span>
         </div>
       )}
       {data.editChat && (
         <div className="channel-actions">
           <RemoveCircleIcon/>
-          <span className="link" onClick={() => deleteChannel()}>Delete channel</span>
+          <span className="link" onClick={deleteChannel}>Delete channel</span>
         </div>
       )}
       {data.editChat && <ChatSettings data={data}/>}
